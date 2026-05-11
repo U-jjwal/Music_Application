@@ -9,13 +9,15 @@ dotenv.config()
 
 const app = express();
 
-
+app.use(cors({
+    origin: process.env.CORS_ORIGIN ,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin: ['http://localhost:5173','https://auramusic-two.vercel.app'],
-    credentials: true
-}));
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use('/api/auth', authrouter);
 app.use('/api/music', musicrouter);
