@@ -4,16 +4,24 @@ import authrouter from './routes/auth.route.js';
 import musicrouter from './routes/music.routes.js';
 import cors from 'cors'
 import dotenv from 'dotenv';
+import connectDb from './db/db.js';
 
 dotenv.config()
 
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN ,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: process.env.FROENTEND_URL,
+    credentials: true
+    
 }));
+
+app.use( async (req, res, next) => {
+    console.log("Connecting to database...");
+    await connectDb();
+    next();
+})
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
