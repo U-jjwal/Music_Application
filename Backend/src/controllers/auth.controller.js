@@ -33,7 +33,11 @@ export const register = async (req, res) => {
 
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None"
+})
 
     res.status(201).json({
         message: "User registered successfully",
@@ -72,7 +76,11 @@ export const login = async (req, res) => {
 
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None"
+})
 
     res.status(200).json({
         message: "User logged in successfully",
