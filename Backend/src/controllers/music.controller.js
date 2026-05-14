@@ -30,15 +30,12 @@ export const createMusic = async (req, res) => {
     })
     
 }
-
+//trying to make a feature ri create album but confuse that artist should upload all the song on album only or artist can upload songs nad then artist can make album and add all songs there
 export const createAlbum = async (req, res) => {
-    
-    
     try {
        
-
         const {title, musics} = req.body;
-
+        
         const album = await Album.create({
             title,
             musics,
@@ -57,7 +54,8 @@ export const createAlbum = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message: "Internal server error"
+            message: "Internal server error",
+            error: err.message
         })
     }
     
